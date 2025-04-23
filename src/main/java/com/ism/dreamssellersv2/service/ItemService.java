@@ -7,9 +7,9 @@ import com.ism.model.UpdateItemRequest;
 import java.util.List;
 
 public interface ItemService {
-    ItemDTO createItem(ItemCreateDTO itemCreateDTO);
-    void deleteItem(Integer itemId);
-    ItemDTO getItemById(Integer itemId);
     List<ItemDTO> getItems();
+    ItemDTO getItemById(Integer itemId);
+    ItemDTO createItem(ItemCreateDTO itemCreateDTO);
     ItemDTO updateItem(Integer itemId, UpdateItemRequest updateItemRequest);
+    void deleteItem(Integer itemId);
 }

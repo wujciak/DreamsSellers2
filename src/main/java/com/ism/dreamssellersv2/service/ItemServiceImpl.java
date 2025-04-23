@@ -3,9 +3,7 @@ package com.ism.dreamssellersv2.service;
 import com.ism.dreamssellersv2.mapper.ItemMapper;
 import com.ism.dreamssellersv2.model.ItemEntity;
 import com.ism.dreamssellersv2.repository.ItemRepository;
-import com.ism.model.ItemCreateDTO;
-import com.ism.model.ItemDTO;
-import com.ism.model.UpdateItemRequest;
+import com.ism.model.*;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -25,24 +23,6 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public ItemDTO createItem(ItemCreateDTO itemCreateDTO) {
-        ItemEntity itemEntity = itemMapper.itemCreateDTOToItemEntity(itemCreateDTO);
-        return itemMapper.itemEntityToItemDTO(itemRepository.save(itemEntity));
-    }
-
-    @Override
-    public void deleteItem(Integer itemId) {
-        itemRepository.deleteById(itemId);
-    }
-
-    @Override
-    public ItemDTO getItemById(Integer itemId) {
-        return itemRepository.findById(itemId)
-                .map(itemMapper::itemEntityToItemDTO)
-                .orElseThrow(() -> new RuntimeException("Item not found"));
-    }
-
-    @Override
     public List<ItemDTO> getItems() {
         return itemRepository.findAll()
                 .stream()
@@ -51,15 +31,28 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public ItemDTO updateItem(Integer itemId, UpdateItemRequest updateItemRequest) {
+    public ItemDTO getItemById(Integer itemId) {
         ItemEntity itemEntity = itemRepository.findById(itemId)
                 .orElseThrow(() -> new RuntimeException("Item not found"));
-        if (updateItemRequest.getPrice() != null) {
-            itemEntity.setPrice(updateItemRequest.getPrice());
-        }
-        if (updateItemRequest.getStock() != null) {
-            itemEntity.setStock(updateItemRequest.getStock());
-        }
+        return itemMapper.itemEntityToItemDTO(itemEntity);
+    }
+
+    @Override
+    public ItemDTO createItem(ItemCreateDTO itemCreateDTO) {
+        ItemEntity itemEntity = itemMapper.itemCreateDTOToItemEntity(itemCreateDTO);
         return itemMapper.itemEntityToItemDTO(itemRepository.save(itemEntity));
+    }
+
+    @Override
+    public ItemDTO updateItem(Integer itemId, UpdateItemRequest updateItemRequest) {
+        return null; // not implemented
+    }
+
+    @Override
+    public void deleteItem(Integer itemId) {
+        if (!itemRepository.existsById(itemId)) {
+            throw new RuntimeException("Item not found");
+        }
+        itemRepository.deleteById(itemId);
     }
 }

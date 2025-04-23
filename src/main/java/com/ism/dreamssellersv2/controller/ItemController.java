@@ -1,6 +1,7 @@
 package com.ism.dreamssellersv2.controller;
 
 import com.ism.api.ItemApi;
+import com.ism.dreamssellersv2.service.ItemService;
 import com.ism.model.ItemCreateDTO;
 import com.ism.model.ItemDTO;
 import com.ism.model.UpdateItemRequest;
@@ -11,28 +12,36 @@ import java.util.List;
 
 @RestController
 public class ItemController implements ItemApi {
+
+    private final ItemService itemService;
+
+    public ItemController(ItemService itemService) {
+        this.itemService = itemService;
+    }
+
     @Override
     public ResponseEntity<ItemDTO> createItem(ItemCreateDTO itemCreateDTO) {
-        return null;
+        return ResponseEntity.ok(itemService.createItem(itemCreateDTO));
     }
 
     @Override
     public ResponseEntity<Void> deleteItem(Integer itemId) {
-        return null;
+        itemService.deleteItem(itemId);
+        return ResponseEntity.noContent().build();
     }
 
     @Override
     public ResponseEntity<ItemDTO> getItemById(Integer itemId) {
-        return null;
+        return ResponseEntity.ok(itemService.getItemById(itemId));
     }
 
     @Override
     public ResponseEntity<List<ItemDTO>> getItems() {
-        return null;
+        return ResponseEntity.ok(itemService.getItems());
     }
 
     @Override
     public ResponseEntity<ItemDTO> updateItem(Integer itemId, UpdateItemRequest updateItemRequest) {
-        return null;
+        return ResponseEntity.ok(itemService.updateItem(itemId, updateItemRequest));
     }
 }

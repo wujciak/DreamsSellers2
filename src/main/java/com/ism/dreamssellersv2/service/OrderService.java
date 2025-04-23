@@ -6,8 +6,8 @@ import com.ism.model.OrderDTO;
 import java.util.List;
 
 public interface OrderService {
+    List<OrderDTO> getOrders();
+    OrderDTO getOrderById(Integer orderId);
     OrderDTO createOrder(OrderCreateDTO orderCreateDTO);
     void deleteOrder(Integer orderId);
-    OrderDTO getOrderById(Integer orderId);
-    List<OrderDTO> getOrders();
 }

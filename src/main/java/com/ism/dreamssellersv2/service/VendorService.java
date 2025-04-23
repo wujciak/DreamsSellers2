@@ -6,8 +6,8 @@ import com.ism.model.VendorDTO;
 import java.util.List;
 
 public interface VendorService {
+    List<VendorDTO> getVendors();
+    VendorDTO getVendorById(Integer vendorId);
     VendorDTO createVendor(VendorCreateDTO vendorCreateDTO);
     void deleteVendor(Integer vendorId);
-    VendorDTO getVendorById(Integer vendorId);
-    List<VendorDTO> getVendors();
 }

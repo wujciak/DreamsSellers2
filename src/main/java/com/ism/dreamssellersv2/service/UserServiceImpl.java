@@ -22,25 +22,7 @@ public class UserServiceImpl implements UserService {
         this.userRepository = userRepository;
         this.userMapper = userMapper;
     }
-    
-    @Override
-    public UserDTO createUser(UserCreateDTO userCreateDTO) {
-        UserEntity userEntity = userMapper.userCreateDTOToUserEntity(userCreateDTO);
-        return userMapper.userEntityToUserDTO(userRepository.save(userEntity));
-    }
-    
-    @Override
-    public void deleteUser(Integer userId) {
-        userRepository.deleteById(userId);
-    }
-    
-    @Override
-    public UserDTO getUserById(Integer userId) {
-        return userRepository.findById(userId)
-                .map(userMapper::userEntityToUserDTO)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-    }
-    
+
     @Override
     public List<UserDTO> getUsers() {
         return userRepository.findAll()
@@ -48,13 +30,35 @@ public class UserServiceImpl implements UserService {
                 .map(userMapper::userEntityToUserDTO)
                 .collect(Collectors.toList());
     }
-    
+
+    @Override
+    public UserDTO getUserById(Integer userId) {
+        UserEntity userEntity = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        return userMapper.userEntityToUserDTO(userEntity);
+    }
+
+    @Override
+    public UserDTO createUser(UserCreateDTO userCreateDTO) {
+        UserEntity userEntity = userMapper.userCreateDTOToUserEntity(userCreateDTO);
+        return userMapper.userEntityToUserDTO(userRepository.save(userEntity));
+    }
+
     @Override
     public UserDTO updateUser(Integer userId, UserCreateDTO userCreateDTO) {
         UserEntity existingUser = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
-        existingUser.setName(userCreateDTO.getName());
-        existingUser.setAuth(userMapper.userCreateDTOToUserEntity(userCreateDTO).getAuth());
-        return userMapper.userEntityToUserDTO(userRepository.save(existingUser));
+
+        UserEntity updatedUser = userMapper.userCreateDTOToUserEntity(userCreateDTO);
+        updatedUser.setUserId(existingUser.getUserId());
+        return userMapper.userEntityToUserDTO(userRepository.save(updatedUser));
+    }
+
+    @Override
+    public void deleteUser(Integer userId) {
+        if (!userRepository.existsById(userId)) {
+            throw new RuntimeException("User not found");
+        }
+        userRepository.deleteById(userId);
     }
 }

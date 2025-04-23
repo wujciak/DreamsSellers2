@@ -6,9 +6,9 @@ import com.ism.model.UserDTO;
 import java.util.List;
 
 public interface UserService {
-    UserDTO createUser(UserCreateDTO userCreateDTO);
-    void deleteUser(Integer userId);
-    UserDTO getUserById(Integer userId);
     List<UserDTO> getUsers();
+    UserDTO getUserById(Integer userId);
+    UserDTO createUser(UserCreateDTO userCreateDTO);
     UserDTO updateUser(Integer userId, UserCreateDTO userCreateDTO);
+    void deleteUser(Integer userId);
 }
