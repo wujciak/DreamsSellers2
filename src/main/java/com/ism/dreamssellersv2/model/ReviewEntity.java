@@ -25,9 +25,6 @@ public class ReviewEntity {
     @Column(name = "comment", length = 500)
     private String comment;
 
-    @Column(name = "created_at", nullable = false)
-    private LocalDateTime createdAt;
-
     public ReviewEntity() {}
 
     public Integer getReviewId() {
@@ -68,13 +65,5 @@ public class ReviewEntity {
 
     public void setComment(String comment) {
         this.comment = comment;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
     }
 }

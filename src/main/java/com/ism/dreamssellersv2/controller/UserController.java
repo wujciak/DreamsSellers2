@@ -6,6 +6,8 @@ import com.ism.model.UserCreateDTO;
 import com.ism.model.UserDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -20,7 +22,7 @@ public class UserController implements UserApi {
 
     @Override
     public ResponseEntity<UserDTO> createUser(UserCreateDTO userCreateDTO) {
-        return ResponseEntity.ok(userService.createUser(userCreateDTO));
+        throw new ResponseStatusException(HttpStatus.NOT_IMPLEMENTED, "Feature not implemented yet");
     }
 
     @Override
@@ -41,6 +43,6 @@ public class UserController implements UserApi {
 
     @Override
     public ResponseEntity<UserDTO> updateUser(Integer userId, UserCreateDTO userCreateDTO) {
-        return ResponseEntity.ok(userService.updateUser(userId, userCreateDTO));
+        throw new ResponseStatusException(HttpStatus.NOT_IMPLEMENTED, "Update feature is not implemented yet");
     }
 }

@@ -41,6 +41,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public OrderDTO createOrder(OrderCreateDTO orderCreateDTO) {
         OrderEntity orderEntity = orderMapper.orderCreateDTOToOrderEntity(orderCreateDTO);
+        orderEntity.setStatus("PENDING");
         return orderMapper.orderEntityToOrderDTO(orderRepository.save(orderEntity));
     }
 

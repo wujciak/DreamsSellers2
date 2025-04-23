@@ -41,6 +41,7 @@ public class VendorServiceImpl implements VendorService {
     @Override
     public VendorDTO createVendor(VendorCreateDTO vendorCreateDTO) {
         VendorEntity vendorEntity = vendorMapper.vendorCreateDTOToVendorEntity(vendorCreateDTO);
+        vendorEntity.setVerified(false);
         return vendorMapper.vendorEntityToVendorDTO(vendorRepository.save(vendorEntity));
     }
 

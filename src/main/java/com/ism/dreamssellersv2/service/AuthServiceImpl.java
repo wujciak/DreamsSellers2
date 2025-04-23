@@ -33,6 +33,7 @@ public class AuthServiceImpl implements AuthService {
             throw new RuntimeException("Username already taken");
         }
         AuthEntity authEntity = authMapper.registerDTOToAuthEntity(registerDTO);
+        authEntity.setPassword(registerDTO.getPassword());
         UserEntity userEntity = new UserEntity();
         userEntity.setName(registerDTO.getName());
         authEntity.setUser(userEntity);

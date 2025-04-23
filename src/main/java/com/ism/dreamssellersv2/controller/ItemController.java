@@ -5,8 +5,10 @@ import com.ism.dreamssellersv2.service.ItemService;
 import com.ism.model.ItemCreateDTO;
 import com.ism.model.ItemDTO;
 import com.ism.model.UpdateItemRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -42,6 +44,6 @@ public class ItemController implements ItemApi {
 
     @Override
     public ResponseEntity<ItemDTO> updateItem(Integer itemId, UpdateItemRequest updateItemRequest) {
-        return ResponseEntity.ok(itemService.updateItem(itemId, updateItemRequest));
+        throw new ResponseStatusException(HttpStatus.NOT_IMPLEMENTED, "Feature not implemented yet");
     }
 }
