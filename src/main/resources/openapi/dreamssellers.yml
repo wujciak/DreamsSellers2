@@ -1,0 +1,783 @@
+openapi: 3.0.0
+info:
+  title: E-Commerce API
+  version: 1.0.0
+  description: API for managing users, items, reviews, orders, and vendors.
+
+paths:
+  /users:
+    get:
+      summary: Get all users
+      operationId: getUsers
+      tags:
+        - User
+      responses:
+        '200':
+          description: List of users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserDTO'
+    post:
+      summary: Create a new user
+      operationId: createUser
+      tags:
+        - User
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCreateDTO'
+      responses:
+        '201':
+          description: User created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDTO'
+
+  /users/{userId}:
+    get:
+      summary: Get user by ID
+      operationId: getUserById
+      tags:
+        - User
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: User details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDTO'
+    patch:
+      summary: Update user by ID
+      operationId: updateUser
+      tags:
+        - User
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCreateDTO'
+      responses:
+        '200':
+          description: User updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDTO'
+    delete:
+      summary: Delete user by ID
+      operationId: deleteUser
+      tags:
+        - User
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: User deleted
+
+  /items:
+    get:
+      summary: Get all items
+      operationId: getItems
+      tags:
+        - Item
+      responses:
+        '200':
+          description: List of items
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ItemDTO'
+    post:
+      summary: Create a new item
+      operationId: createItem
+      tags:
+        - Item
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ItemCreateDTO'
+      responses:
+        '201':
+          description: Item created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemDTO'
+
+  /items/{itemId}:
+    get:
+      summary: Get item by ID
+      operationId: getItemById
+      tags:
+        - Item
+      parameters:
+        - name: itemId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Item details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemDTO'
+    patch:
+      summary: Update item by ID
+      operationId: updateItem
+      tags:
+        - Item
+      parameters:
+        - name: itemId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              anyOf:
+                - $ref: '#/components/schemas/ItemUpdateStockDTO'
+                - $ref: '#/components/schemas/ItemUpdatePriceDTO'
+      responses:
+        '200':
+          description: Item updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemDTO'
+    delete:
+      summary: Delete item by ID
+      operationId: deleteItem
+      tags:
+        - Item
+      parameters:
+        - name: itemId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Item deleted
+
+  /reviews:
+    get:
+      summary: Get all reviews
+      operationId: getReviews
+      tags:
+        - Review
+      responses:
+        '200':
+          description: List of reviews
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ReviewDTO'
+    post:
+      summary: Create a new review
+      operationId: createReview
+      tags:
+        - Review
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReviewCreateDTO'
+      responses:
+        '201':
+          description: Review created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReviewDTO'
+
+  /reviews/{reviewId}:
+    get:
+      summary: Get review by ID
+      operationId: getReviewById
+      tags:
+        - Review
+      parameters:
+        - name: reviewId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Review details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReviewDTO'
+    delete:
+      summary: Delete review by ID
+      operationId: deleteReview
+      tags:
+        - Review
+      parameters:
+        - name: reviewId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Review deleted
+
+
+  /orders:
+    get:
+      summary: Get all orders
+      operationId: getOrders
+      tags:
+        - Order
+      responses:
+        '200':
+          description: List of orders
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrderDTO'
+    post:
+      summary: Create a new order
+      operationId: createOrder
+      tags:
+        - Order
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderCreateDTO'
+      responses:
+        '201':
+          description: Order created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderDTO'
+
+  /orders/{orderId}:
+    get:
+      summary: Get order by ID
+      operationId: getOrderById
+      tags:
+        - Order
+      parameters:
+        - name: orderId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Order details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderDTO'
+    delete:
+      summary: Delete order by ID
+      operationId: deleteOrder
+      tags:
+        - Order
+      parameters:
+        - name: orderId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Order deleted
+
+  /vendors:
+    get:
+      summary: Get all vendors
+      operationId: getVendors
+      tags:
+        - Vendor
+      responses:
+        '200':
+          description: List of vendors
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VendorDTO'
+    post:
+      summary: Create a new vendor
+      operationId: createVendor
+      tags:
+        - Vendor
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VendorCreateDTO'
+      responses:
+        '201':
+          description: Vendor created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VendorDTO'
+
+  /vendors/{vendorId}:
+    get:
+      summary: Get vendor by ID
+      operationId: getVendorById
+      tags:
+        - Vendor
+      parameters:
+        - name: vendorId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Vendor details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VendorDTO'
+    delete:
+      summary: Delete vendor by ID
+      operationId: deleteVendor
+      tags:
+        - Vendor
+      parameters:
+        - name: vendorId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Vendor deleted
+
+  /auth/register:
+    post:
+      summary: Register a new user
+      operationId: register
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterDTO'
+      responses:
+        '201':
+          description: Registration successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponseDTO'
+
+  /auth/login:
+    post:
+      summary: Login user
+      operationId: login
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginDTO'
+      responses:
+        '200':
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponseDTO'
+
+
+components:
+  schemas:
+    ### USER SCHEMAS ###
+    UserDTO:
+      type: object
+      properties:
+        userId:
+          type: integer
+          example: 1
+        username:
+          type: string
+          example: "johndoe"
+        name:
+          type: string
+          example: "John Doe"
+        email:
+          type: string
+          format: email
+          example: "john@example.com"
+        role:
+          type: string
+          enum: [admin, vendor, customer]
+          example: "customer"
+      required:
+        - userId
+        - username
+        - name
+        - email
+        - role
+
+    UserCreateDTO:
+      type: object
+      properties:
+        username:
+          type: string
+          example: "johndoe"
+        name:
+          type: string
+          example: "John Doe"
+        email:
+          type: string
+          format: email
+          example: "john@example.com"
+        role:
+          type: string
+          enum: [admin, vendor, customer]
+          example: "customer"
+      required:
+        - username
+        - name
+        - email
+        - role
+
+    ### ITEM SCHEMAS ###
+    ItemDTO:
+      type: object
+      properties:
+        itemId:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "Premium Widget"
+        description:
+          type: string
+          example: "High-quality widget"
+        price:
+          type: number
+          format: double
+          example: 19.99
+        stock:
+          type: integer
+          example: 100
+        imageUrl:
+          type: string
+          example: "https://example.com/images/widget.jpg"
+        vendorId:
+          type: integer
+          example: 1
+      required:
+        - itemId
+        - name
+        - price
+        - stock
+        - imageUrl
+        - vendorId
+
+    ItemCreateDTO:
+      type: object
+      properties:
+        name:
+          type: string
+          example: "Premium Widget"
+        description:
+          type: string
+          example: "High-quality widget"
+        price:
+          type: number
+          format: double
+          example: 19.99
+        stock:
+          type: integer
+          example: 100
+        imageUrl:
+          type: string
+          example: "https://example.com/images/widget.jpg"
+        vendorId:
+          type: integer
+          example: 1
+      required:
+        - name
+        - price
+        - stock
+        - imageUrl
+        - vendorId
+
+    ItemUpdateStockDTO:
+      type: object
+      properties:
+        stock:
+          type: integer
+          example: 150
+
+    ItemUpdatePriceDTO:
+      type: object
+      properties:
+        price:
+          type: number
+          format: double
+          example: 24.99
+
+    ### REVIEW SCHEMAS ###
+    ReviewDTO:
+      type: object
+      properties:
+        reviewId:
+          type: integer
+          example: 1
+        itemId:
+          type: integer
+          example: 1
+        userId:
+          type: integer
+          example: 1
+        username:
+          type: string
+          example: "johndoe"
+        rating:
+          type: number
+          format: double
+          minimum: 1.0
+          maximum: 5.0
+          example: 4.5
+        comment:
+          type: string
+          example: "Great product!"
+      required:
+        - reviewId
+        - itemId
+        - userId
+        - username
+        - rating
+
+    ReviewCreateDTO:
+      type: object
+      properties:
+        itemId:
+          type: integer
+          example: 1
+        userId:
+          type: integer
+          example: 1
+        username:
+          type: string
+          example: "johndoe"
+        rating:
+          type: number
+          format: double
+          minimum: 1.0
+          maximum: 5.0
+          example: 4.5
+        comment:
+          type: string
+          example: "Great product!"
+      required:
+        - itemId
+        - userId
+        - username
+        - rating
+
+    ### ORDER SCHEMAS ###
+    OrderDTO:
+      type: object
+      properties:
+        orderId:
+          type: integer
+          example: 1
+        userId:
+          type: integer
+          example: 1
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ItemDTO'
+        totalPrice:
+          type: number
+          format: double
+          example: 59.99
+        status:
+          type: string
+          enum: [pending, shipped, cancelled]
+          example: "pending"
+      required:
+        - orderId
+        - userId
+        - items
+        - totalPrice
+        - status
+
+    OrderCreateDTO:
+      type: object
+      properties:
+        userId:
+          type: integer
+          example: 1
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ItemDTO'
+      required:
+        - items
+        - userId
+
+    ### AUTH SCHEMAS ###
+    RegisterDTO:
+      type: object
+      properties:
+        username:
+          type: string
+          example: "johndoe"
+        password:
+          type: string
+          format: password
+          example: "securepassword123"
+        name:
+          type: string
+          example: "John Doe"
+        role:
+          type: string
+          enum: [admin, vendor, customer]
+          example: "customer"
+      required:
+        - username
+        - password
+        - name
+        - role
+
+    LoginDTO:
+      type: object
+      properties:
+        username:
+          type: string
+          example: "johndoe"
+        password:
+          type: string
+          format: password
+          example: "securepassword123"
+      required:
+        - username
+        - password
+
+    LoginResponseDTO:
+      type: object
+      properties:
+        username:
+          type: string
+          example: "johndoe"
+      required:
+        - username
+
+    AuthResponseDTO:
+      type: object
+      properties:
+        userId:
+          type: integer
+          example: 1
+        username:
+          type: string
+          example: "johndoe"
+        name:
+          type: string
+          example: "John Doe"
+        role:
+          type: string
+          enum: [admin, vendor, customer]
+          example: "customer"
+      required:
+        - userId
+        - username
+        - name
+        - role
+
+    ### VENDOR SCHEMAS ###
+    VendorDTO:
+      type: object
+      properties:
+        vendorId:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "Acme Corp"
+        description:
+          type: string
+          example: "Quality products since 1920"
+        verified:
+          type: boolean
+          example: false
+      required:
+        - vendorId
+        - name
+        - verified
+
+    VendorCreateDTO:
+      type: object
+      properties:
+        name:
+          type: string
+          example: "Acme Corp"
+        description:
+          type: string
+          example: "Quality products since 1920"
+      required:
+        - name
+
+
+
+
+
+
+
+
+
+
