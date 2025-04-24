@@ -52,7 +52,7 @@ public class AuthServiceImpl implements AuthService {
             AuthEntity authEntity = optionalAuth.get();
 
             if (authEntity.getPassword().equals(loginDTO.getPassword())) {
-                return new LoginResponseDTO().username(authEntity.getUsername());
+                return new LoginResponseDTO().authId(authEntity.getAuthId()).username(authEntity.getUsername());
             } else {
                 throw new RuntimeException("Invalid password");
             }

@@ -711,10 +711,14 @@ components:
     LoginResponseDTO:
       type: object
       properties:
+        authId:
+          type: integer
+          example: 1
         username:
           type: string
           example: "johndoe"
       required:
+        - authId
         - username
 
     AuthResponseDTO:
