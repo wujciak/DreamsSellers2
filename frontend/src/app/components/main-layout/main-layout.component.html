@@ -1,10 +1,4 @@
 <div class="layout">
-  <header class="header">
-    <div class="logo">DreamsSellers</div>
-    <a routerLink="/profile" class="avatar-link" title="Profile">
-      <img ngSrc="https://www.svgrepo.com/show/384674/account-avatar-profile-user-11.svg" alt="Avatar" [width]="4" [height]="4"/>
-    </a>
-  </header>
 
   <div class="layout-body">
     <main class="main-content">
@@ -12,6 +6,8 @@
     </main>
 
     <nav class="sidebar">
+      <h2>DramsSellers</h2>
+      <a routerLink="/profile" class="sidebar-link">Profile</a>
       <a routerLink="/orders" class="sidebar-link">Orders</a>
       <a routerLink="/vendor/create" class="sidebar-link">Create Vendor</a>
       <button (click)="logout()" class="sidebar-link">Logout</button>

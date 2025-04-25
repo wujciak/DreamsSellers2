@@ -1,21 +1,22 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import {Router, RouterLink, RouterOutlet} from '@angular/router';
 
 @Component({
   selector: 'app-main-layout',
-  standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule,
-    NgOptimizedImage
-  ],
   templateUrl: './main-layout.component.html',
+  imports: [
+    RouterLink,
+    RouterOutlet
+  ],
   styleUrls: ['./main-layout.component.css']
 })
 export class MainLayoutComponent {
+  constructor(private router: Router) {}
+
   logout(): void {
-    localStorage.clear();
-    window.location.href = '/login';
+    localStorage.removeItem('authId');
+    localStorage.removeItem('username');
+
+    this.router.navigate(['/login']);
   }
 }

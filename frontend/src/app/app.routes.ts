@@ -15,8 +15,8 @@ export const routes: Routes = [
     children: [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'vendor/create', component: CreateVendorComponent },
-      { path: 'profile', component: DashboardComponent },
-      { path: 'orders', component: DashboardComponent },
+      { path: 'profile', component: DashboardComponent }, //do zmiany
+      { path: 'orders', component: DashboardComponent }, // do zmiany
       { path: 'item/add', component: AddItemComponent },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
     ]
