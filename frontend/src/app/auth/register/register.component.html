@@ -5,11 +5,14 @@
     <label for="username">Username:</label>
     <input id="username" name="username" [(ngModel)]="newUser.username" required />
 
-    <label for="email">Email:</label>
-    <input id="email" name="email" [(ngModel)]="newUser.email" required />
+    <label for="name">Name:</label>
+    <input id="name" name="name" [(ngModel)]="newUser.name" required />
 
     <label for="password">Password:</label>
     <input id="password" name="password" type="password" [(ngModel)]="newUser.password" required />
+
+    <label for="role">Role:</label>
+    <input id="role" name="role" [(ngModel)]="newUser.role" required />
 
     <button type="submit">Register</button>
     <p>Already have an account? <a routerLink="/auth/login">Login here</a></p>

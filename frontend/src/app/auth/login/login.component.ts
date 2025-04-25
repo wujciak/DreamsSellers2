@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 
@@ -9,7 +9,8 @@ import {CommonModule} from '@angular/common';
   standalone: true,
   imports: [
     FormsModule,
-    CommonModule
+    CommonModule,
+    RouterLink
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
@@ -29,6 +30,8 @@ export class LoginComponent {
     this.authService.login(this.credentials).subscribe({
       next: async (response) => {
         console.log('Logged in successfully:', response);
+        localStorage.setItem('authId', String(response.authId));
+        localStorage.setItem('username', response.username);
         await this.router.navigate(['/dashboard']);
       },
       error: (error) => {
