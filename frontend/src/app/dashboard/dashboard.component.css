@@ -1,23 +1,27 @@
 .dashboard-container {
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
   font-family: Arial, sans-serif;
 }
 
 .content {
   flex: 1;
   padding: 2rem;
-  overflow-y: auto;
+}
+
+h2 {
+  margin-bottom: 1.5rem;
 }
 
 .item-card {
   display: flex;
   align-items: center;
-  margin-bottom: 1.5rem;
-  padding: 1rem;
   border: 1px solid #ddd;
+  padding: 1rem;
+  margin-bottom: 1rem;
   border-radius: 8px;
-  background-color: #f9f9f9;
+  background-color: #fafafa;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .item-card img {
@@ -34,17 +38,16 @@
 
 .item-details h3 {
   margin: 0;
-  font-size: 1.2rem;
 }
 
 .item-details p {
-  margin: 0.3rem 0;
+  margin: 0.25rem 0;
 }
 
 .item-details button {
   margin-top: 0.5rem;
-  padding: 0.4rem 0.8rem;
-  background-color: #dc3545;
+  padding: 0.4rem 1rem;
+  background-color: #d9534f;
   color: white;
   border: none;
   border-radius: 4px;
@@ -52,15 +55,14 @@
 }
 
 .item-details button:hover {
-  background-color: #c82333;
+  background-color: #c9302c;
 }
 
 .sidebar {
   width: 200px;
-  background-color: #222;
-  color: white;
+  background-color: #f1f1f1;
   padding: 2rem 1rem;
-  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+  border-left: 1px solid #ccc;
 }
 
 .sidebar ul {
@@ -69,15 +71,15 @@
 }
 
 .sidebar li {
-  margin: 1rem 0;
+  margin-bottom: 1rem;
 }
 
 .sidebar a {
-  color: white;
   text-decoration: none;
+  color: #333;
   font-weight: bold;
 }
 
 .sidebar a:hover {
-  text-decoration: underline;
+  color: #007bff;
 }

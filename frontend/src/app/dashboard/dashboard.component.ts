@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import { ItemService } from '../services/item.service';
 import { ItemDTO } from '../models/item.model';
 import {CommonModule} from '@angular/common';
@@ -8,7 +8,7 @@ import {FormsModule} from '@angular/forms';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
