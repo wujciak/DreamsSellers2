@@ -1,0 +1,25 @@
+<div class="add-item-container">
+  <h2>Add New Item</h2>
+
+  <form (ngSubmit)="onSubmit()">
+    <label>Name:</label>
+    <input type="text" [(ngModel)]="item.name" name="name" required />
+
+    <label>Description:</label>
+    <textarea [(ngModel)]="item.description" name="description" required></textarea>
+
+    <label>Price:</label>
+    <input type="number" [(ngModel)]="item.price" name="price" required />
+
+    <label>Stock:</label>
+    <input type="number" [(ngModel)]="item.stock" name="stock" required />
+
+    <label>Image URL:</label>
+    <input type="text" [(ngModel)]="item.imageUrl" name="imageUrl" required />
+
+    <button type="submit">Add Item</button>
+  </form>
+
+  <div *ngIf="success" class="success">{{ success }}</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+</div>

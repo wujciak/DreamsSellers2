@@ -1,10 +1,25 @@
 import { Routes } from '@angular/router';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { MainLayoutComponent } from './components/main-layout/main-layout.component';
+import { CreateVendorComponent } from './components/create-vendor/create-vendor.component';
+import {AddItemComponent} from './components/add-item/add-item.component';
 
 export const routes: Routes = [
-  { path: 'auth/login', loadComponent: () => import('./auth/login/login.component').then(m => m.LoginComponent) },
-  { path: 'auth/register', loadComponent: () => import('./auth/register/register.component').then(m => m.RegisterComponent) },
-  { path: 'dashboard', loadComponent: () => import('./dashboard/dashboard.component').then(m => m.DashboardComponent) },
-  { path: 'vendor/create', loadComponent: () => import('./vendor/create-vendor/create-vendor.component').then(m => m.CreateVendorComponent) },
-  { path: '', redirectTo: '/auth/login', pathMatch: 'full' },
-  { path: '**', redirectTo: '/auth/login' },
+  { path: 'auth/login', component: LoginComponent },
+  { path: 'auth/register', component: RegisterComponent },
+  {
+    path: '',
+    component: MainLayoutComponent,
+    children: [
+      { path: 'dashboard', component: DashboardComponent },
+      { path: 'vendor/create', component: CreateVendorComponent },
+      { path: 'profile', component: DashboardComponent },
+      { path: 'orders', component: DashboardComponent },
+      { path: 'item/add', component: AddItemComponent },
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
+    ]
+  },
+  { path: '**', redirectTo: 'dashboard' }
 ];

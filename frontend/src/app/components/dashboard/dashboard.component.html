@@ -1,0 +1,12 @@
+<div class="dashboard-container">
+  <div class="item-card" *ngFor="let item of items">
+    <img [ngSrc]="item.imageUrl" alt="{{ item.name }}" />
+    <div class="item-content">
+      <h3>{{ item.name }}</h3>
+      <p>{{ item.description }}</p>
+      <p class="price">Price: {{ item.price }} PLN</p>
+      <p class="stock">Stock: {{ item.stock }}</p>
+      <button (click)="deleteItem(item.itemId)" class="delete-btn">Delete</button>
+    </div>
+  </div>
+</div>

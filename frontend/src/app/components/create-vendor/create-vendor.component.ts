@@ -19,6 +19,7 @@ export class CreateVendorComponent {
 
   success: string | null = null;
   error: string | null = null;
+  submitted: boolean = false;
 
   constructor(private vendorService: VendorService) {}
 
@@ -28,11 +29,13 @@ export class CreateVendorComponent {
         this.success = `Vendor "${data.name}" created successfully!`;
         this.error = null;
         this.vendor = { name: '', description: '' };
+        this.submitted = true;
       },
       error: (err) => {
         console.error('Vendor creation error:', err);
         this.success = null;
         this.error = 'Failed to create vendor.';
+        this.submitted = false;
       }
     });
   }
