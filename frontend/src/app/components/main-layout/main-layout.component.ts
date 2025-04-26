@@ -16,7 +16,6 @@ export class MainLayoutComponent {
   logout(): void {
     localStorage.removeItem('authId');
     localStorage.removeItem('username');
-
     this.router.navigate(['/login']);
   }
 }

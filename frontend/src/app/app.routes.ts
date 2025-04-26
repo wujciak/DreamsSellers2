@@ -4,22 +4,25 @@ import { RegisterComponent } from './components/register/register.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { MainLayoutComponent } from './components/main-layout/main-layout.component';
 import { CreateVendorComponent } from './components/create-vendor/create-vendor.component';
-import {AddItemComponent} from './components/add-item/add-item.component';
+import { AddItemComponent } from './components/add-item/add-item.component';
+import { AuthGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
+  { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
   { path: 'auth/login', component: LoginComponent },
   { path: 'auth/register', component: RegisterComponent },
   {
     path: '',
     component: MainLayoutComponent,
+    canActivateChild: [AuthGuard],
     children: [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'vendor/create', component: CreateVendorComponent },
-      { path: 'profile', component: DashboardComponent }, //do zmiany
-      { path: 'orders', component: DashboardComponent }, // do zmiany
+      // { path: 'profile', component: DashboardComponent },
+      // { path: 'orders', component: DashboardComponent },
       { path: 'item/add', component: AddItemComponent },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
     ]
   },
-  { path: '**', redirectTo: 'dashboard' }
+  { path: '**', redirectTo: 'auth/login' }
 ];
