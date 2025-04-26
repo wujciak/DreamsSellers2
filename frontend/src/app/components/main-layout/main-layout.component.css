@@ -71,3 +71,11 @@
   background-color: #007bff;
   color: #fff;
 }
+
+.sidebar h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+}
