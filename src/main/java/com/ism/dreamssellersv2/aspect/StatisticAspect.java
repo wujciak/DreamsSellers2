@@ -22,5 +22,7 @@ public class StatisticAspect {
         String endpoint = className + "." + methodName;
 
         statisticService.recordRequest(endpoint, null);
+        statisticService.updateLastCalledEndpoint(endpoint);
     }
+
 }

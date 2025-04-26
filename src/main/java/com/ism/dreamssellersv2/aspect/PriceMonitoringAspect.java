@@ -29,10 +29,12 @@ public class PriceMonitoringAspect {
             for (Object obj : itemList) {
                 if (obj instanceof ItemDTO itemDto) {
                     statisticService.checkHighestPrice(itemDto.getPrice());
+                    statisticService.addItemPrice(itemDto.getPrice());
                 }
             }
         }
 
         return result;
     }
+
 }

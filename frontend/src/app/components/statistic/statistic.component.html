@@ -1,0 +1,23 @@
+<div class="statistics-container">
+  <h1>Statistics</h1>
+
+  <div *ngIf="hasStatistics; else loading">
+    <p><strong>Highest Price:</strong> {{ statistics?.highestPrice }}</p>
+    <p><strong>Average Price:</strong> {{ statistics?.averagePrice }}</p>
+    <p><strong>Total Items:</strong> {{ statistics?.totalItems }}</p>
+    <p><strong>Most Called Endpoint:</strong> {{ statistics?.mostPopularEndpoint }}</p>
+    <p><strong>Last Called Endpoint:</strong> {{ statistics?.lastCalledEndpoint }}</p>
+    <p><strong>Total Requests:</strong> {{ statistics?.totalRequests }}</p>
+
+    <h3>Endpoint Call Counts:</h3>
+    <ul>
+      <li *ngFor="let entry of statistics?.endpointCallCounts | keyvalue">
+      {{ entry.key }}: {{ entry.value }}
+      </li>
+    </ul>
+  </div>
+
+  <ng-template #loading>
+    <p>Loading statistics...</p>
+  </ng-template>
+</div>

@@ -6,6 +6,10 @@ export class AuthGuard implements CanActivateChild {
   constructor(private router: Router) {}
 
   canActivateChild(): boolean {
+    if (typeof window === 'undefined') {
+      return true;
+    }
+
     const isLoggedIn = !!localStorage.getItem('authId');
     if (!isLoggedIn) {
       this.router.navigate(['/auth/login']);
@@ -13,4 +17,5 @@ export class AuthGuard implements CanActivateChild {
     }
     return true;
   }
+
 }

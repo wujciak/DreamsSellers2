@@ -6,6 +6,7 @@ import { MainLayoutComponent } from './components/main-layout/main-layout.compon
 import { CreateVendorComponent } from './components/create-vendor/create-vendor.component';
 import { AddItemComponent } from './components/add-item/add-item.component';
 import { AuthGuard } from './guards/auth.guard';
+import {StatisticComponent} from './components/statistic/statistic.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
@@ -21,6 +22,7 @@ export const routes: Routes = [
       // { path: 'profile', component: DashboardComponent },
       // { path: 'orders', component: DashboardComponent },
       { path: 'item/add', component: AddItemComponent },
+      { path: 'statistics', component: StatisticComponent },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
     ]
   },
